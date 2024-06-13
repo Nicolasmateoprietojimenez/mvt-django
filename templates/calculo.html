@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        hola {{ nombre }}
+        {{ apellido }}
+    </h1>
+    <p>Fecha Y Hora de la realizo el trabajo: {{ fecha_hora }}</p>
+    <p>Sus Horas Semanales Trabajadas: {{ horasSemanal }}</p>
+    <p>Tipo de Hora: {{ tipo_horas }} </p>
+    <p>Horas Trabajadas: {{ hora1 }}</p>
+    <p>Valor de Sus Horas: {{ resultado }} mil</p>
+    <a href="{% url 'horas' %}">Volver</a>
+</body>
+</html>

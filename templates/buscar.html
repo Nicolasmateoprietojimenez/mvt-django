@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscar Empleado</title>
+</head>
+<body>
+    <h1>Buscar Empleado</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Buscar</button><br><br>
+        <button><a href="{% url 'horas' %}">Volver</a></button>
+    </form>
+    {% if empleado %}
+        <h2>Datos del Empleado</h2>
+        <p>Número de Documento: {{ empleado.nro_documento }}</p>
+        <p>Nombre: {{ empleado.nombre1 }}</p>
+        <p>Apellido: {{ empleado.apellido1 }}</p>
+        <p>Numero Teelefono: {{ empleado.numero_celular }}</p>
+        <p>Direccion: {{ empleado.direccion }}</p>
+        <p>Arl: {{ empleado.nivel_riesgo }}</p>
+        <h2>Horas Extras</h2>
+    
+    {% for horas_extras in horas_extras %}
+
+    <li>Horas Extra Realizadas: {{ horas_extras.tipo_Hora }} / tiempo: {{ horas_extras.fecha_hora }} / valor: {{ horas_extras.valor }}</li>
+
+    {% endfor %}
+
+    <p>Total Horas Extra:{{ total_valor }}</p>
+    <p>Total salario + Horas Extra: {{ salario_total }} mil</p>
+
+    {% endif %}
+    
+</body>
+</html>

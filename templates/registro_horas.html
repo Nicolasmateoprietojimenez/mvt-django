@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registrar Horas Empleado</title>
+    </head>
+    <style>
+        .errorlist 
+        {
+            display: none;
+        }
+    </style>
+    <body>
+        <h1>Registrar Horas Un Empleado</h1>
+        
+        <form  action="{% url 'nuevo_Horo' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form}}
+            <button type="submit">Enviar</button>
+        </form>
+
+        <a href="{% url 'horas' %}">Volver</a>
+    </body>
+    </html>
+    
