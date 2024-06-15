@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificar Token</title>
+</head>
+<body>
+    <h1>Verificar Token</h1>
+    <form id="verificarForm" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Verificar</button>
+    </form>
+
+    {% if mensaje %}
+    <p>{{ mensaje }}</p>
+    {% endif %}
+</body>
+</html>

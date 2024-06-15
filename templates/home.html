@@ -1,11 +1,70 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link type='text/css' rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/logonomigo.png' %}">
+
 </head>
-<body>
-    <h1>Home de nomigo</h1>
-    <p>Pagina en construcción para el home de NomiGo.</p>
-    <a href="{% url 'login' %}">Inicia Ahora</a>
+<body onload="mostrarModalCookies()">
+    <div id="modalCookies" class="modal">
+        <div class="modal-content">
+            <h2>Aceptar Cookies</h2>
+            <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario. Acepta el uso de cookies para continuar navegando por el sitio.</p>
+            <div class="cookies-btn">
+                <a onclick="aceptarCookies()">Aceptar</a>
+                <a onclick="rechazarCookies()">Rechazar</a>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="cont">
+        <header class="cabecera">
+            <div class="logo">
+                <span class="color1 figura"></span>
+                <span class="color2 figura"></span>
+                <span class="color3 figura"></span>
+                <span class="color4 figura"></span>
+            </div>
+            <nav class="navegacion">
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+                <a href="#">Nosotros</a>
+            </nav>
+        </header>
+        
+        <div class="sub-cont">
+            <h1>NomiGo</h1>
+            <p>El sistema didactico de aprendizaje #1 <br> para estudiantes de contabilidad</p>
+            <div class="enlaces enlaces-color">
+                <a href="{% url 'login' %}" class="btn btn-filled">Ya tengo cuenta</a>
+                <a href="{% url 'register' %}" class="btn btn-outline">Soy nuevo</a>
+            </div>
+            
+        </div>
+    </section>
+    
+    
+
+    <script>
+        function mostrarModalCookies() {
+            var modal = document.getElementById('modalCookies');
+            modal.style.display = 'block';
+        }
+
+        function aceptarCookies() {
+            var modal = document.getElementById('modalCookies');
+            modal.style.display = 'none';
+        }
+
+        function rechazarCookies() {
+            window.location.href = 'https://www.google.com'
+        }
+    </script>
 </body>
 </html>

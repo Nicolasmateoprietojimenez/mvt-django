@@ -34,10 +34,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'deducciones.apps.DeduccionesConfig',
-    'devengos.apps.DevengosConfig',
-    'gestion_empleados.apps.GestionEmpleadosConfig',
-    'novedades.apps.NovedadesConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'deducciones.apps.DeduccionesConfig',
+    'devengos.apps.DevengosConfig',
+    'gestion_empleados.apps.GestionEmpleadosConfig',
+    'novedades.apps.NovedadesConfig',
+    'login.apps.LoginConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,13 +134,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR
-STATICFILES_DIRS=[
-    "nomigo/static",
-    ]
+STATICFILES_DIRS=(os.path.join(BASE_DIR, 'nomigo/static'),)
 
 # Default primary key field typ
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Configuracion del servidor SMTP
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nomigo339@gmail.com'  # Cambiar por tu dirección de correo
+EMAIL_HOST_PASSWORD = 'cynijisdvrsgmkor'  # Cambiar por la contraseña de tu correo
