@@ -22,11 +22,14 @@
                 <a href="#">Administrar Usuarios</a>
                 <a href="#">Reportes</a>
                 <a href="#">Gestion de Novedades</a>
+                <a href="{% url 'horas' %}">Horas extra</a>
             {% endif %}
 
             {% if registros.rol == 'LECTOR' %}
-            {% comment %} <a href="{{% url 'vista_para_accion' 'nro_doc'%}}">Calcular Seguridad social</a> {% endcomment %}
+            {% comment %} <a href="{% url 'vista_para_accion' 'nro_doc'%}">Calcular Seguridad social</a> {% endcomment %}
             {% comment %} Ese es el ejemplo de que deben pasar a la vista, el nro_doc lo sacan de las cookies de sesion, ahi queda guardado al logearse {% endcomment %}
+
+                <a href="{% url 'calcula' request.session.empleado_nro_documento %}">Consultar Horas extra</a>
 
                 <a href="#">Calcular Seguridad social</a>
                 <a href="#">Obtener ARL</a>

@@ -28,7 +28,9 @@ def calcularHoras(request, nro_documento):
     salario = usuario.salario_base
     nombre = usuario.nombre1
     apellido = usuario.apellido1
-     
+
+    data_list = []
+
     # Iterar sobre cada objeto HoraExtra encontrado
     for horitas in horas_extras:
         fecha_hora = horitas.fecha_hora
@@ -54,21 +56,26 @@ def calcularHoras(request, nro_documento):
         elif tipo_horas == 'recargo_nocturno_dominical_festivo':
             resultado = (calculo * 1.10) * hora1  # recargo nocturno dominical
 
-        
         horitas.valor = resultado
         horitas.save()
 
+        # Crear un diccionario con los datos de cada iteración
         data = {
             'nombre': nombre,
             'apellido': apellido,
             'resultado': resultado,
-            'horasSemanal':horasSemanal,
-            'fecha_hora':fecha_hora,
-            'hora1':hora1,
-            'tipo_horas':tipo_horas,
+            'horasSemanal': horasSemanal,
+            'fecha_hora': fecha_hora,
+            'hora1': hora1,
+            'tipo_horas': tipo_horas,
         }
+
+        # Agregar el diccionario a una lista
+        data_list.append(data)
     
-    return render(request, 'calculo.html', data)
+    # Renderizar la plantilla con la lista de datos
+    return render(request, 'calculo.html', {'data_list': data_list})
+
 
 
 def buscar_empleado(request):

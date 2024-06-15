@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculo de Horas Extra</title>
 </head>
 <body>
-    <h1>
-        hola {{ nombre }}
-        {{ apellido }}
-    </h1>
-    <p>Fecha Y Hora de la realizo el trabajo: {{ fecha_hora }}</p>
-    <p>Sus Horas Semanales Trabajadas: {{ horasSemanal }}</p>
-    <p>Tipo de Hora: {{ tipo_horas }} </p>
-    <p>Horas Trabajadas: {{ hora1 }}</p>
-    <p>Valor de Sus Horas: {{ resultado }} mil</p>
-    <a href="{% url 'horas' %}">Volver</a>
+    <h1>Detalle de Horas Extra</h1>
+
+    <!-- Iterar sobre data_list y mostrar cada conjunto de datos -->
+    {% for data in data_list %}
+        <div>
+            <p><strong>Nombre:</strong> {{ data.nombre }}</p>
+            <p><strong>Apellido:</strong> {{ data.apellido }}</p>
+            <p><strong>Fecha y Hora:</strong> {{ data.fecha_hora }}</p>
+            <p><strong>Tipo de Horas:</strong> {{ data.tipo_horas }}</p>
+            <p><strong>Horas Semanales:</strong> {{ data.horasSemanal }}</p>
+            <p><strong>Horas Trabajadas:</strong> {{ data.hora1 }}</p>
+            <p><strong>Resultado:</strong> {{ data.resultado }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+
 </body>
 </html>
