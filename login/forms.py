@@ -2,7 +2,6 @@ import re
 from django import forms
 from gestion_empleados.models import Empleado
 
-
 class LoginForm(forms.Form):
     tipo_documento = forms.ChoiceField(choices=[
         ('CC', 'Cédula de Ciudadanía'),
@@ -10,10 +9,12 @@ class LoginForm(forms.Form):
         ('CE', 'Cédula de Extranjería'),
         ('PSP', 'Pasaporte'),
         ('RC', 'Registro Civil'),
-    ])
-    nro_documento = forms.CharField(max_length=20)
-    password = forms.CharField(widget=forms.PasswordInput)
-    
+    ], widget=forms.Select(attrs={'placeholder': 'Selecciona un tipo de documento'}))
+
+    nro_documento = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Ej: 100364578'}))
+
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))
+
     
 class EmpleadoForm(forms.ModelForm):
     password = forms.CharField(

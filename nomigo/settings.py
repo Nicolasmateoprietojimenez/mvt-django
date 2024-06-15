@@ -136,7 +136,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR
-STATICFILES_DIRS=(os.path.join(BASE_DIR, 'nomigo/static'),)
+STATICFILES_DIRS=(os.path.join(BASE_DIR, 'nomigo/static'),os.path.join(BASE_DIR, 'login/static'),)
 
 # Default primary key field typ
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
