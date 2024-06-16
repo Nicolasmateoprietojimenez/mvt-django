@@ -1,14 +1,94 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea una cuenta</title>
+    <link type='text/css' rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/logonomigo.png' %}">
+    <script src="https://kit.fontawesome.com/381592b739.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h2>Crea una cuenta</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
+    <section class="cont__login">
+        <div class="cont-login">
+           
+            <div class="form">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="column">
+                        <div>
+                            <label for="id_tipo_documento"><i class="fa fa-id-card"></i> Tipo Documento</label>
+                            {{ form.tipo_documento }}
+                        </div>
+                        <div>
+                            <label for="id_nro_documento"><i class="fa fa-user"></i> N° Documento</label>
+                            {{ form.nro_documento }}
+                        </div>
+                        <div>
+                            <label for="id_fecha_expedicion"><i class="fa fa-calendar"></i> Fecha de Expedición</label>
+                            {{ form.fecha_expedicion }}
+                        </div>
+                        <div>
+                            <label for="id_nombre1"><i class="fa fa-user"></i> Primer Nombre</label>
+                            {{ form.nombre1 }}
+                        </div>
+                        <div>
+                            <label for="id_nombre2"><i class="fa fa-user"></i> Segundo Nombre</label>
+                            {{ form.nombre2 }}
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div>
+                            <label for="id_apellido1"><i class="fa fa-user"></i> Primer Apellido</label>
+                            {{ form.apellido1 }}
+                        </div>
+                        <div>
+                            <label for="id_apellido2"><i class="fa fa-user"></i> Segundo Apellido</label>
+                            {{ form.apellido2 }}
+                        </div>
+                        <div>
+                            <label for="id_numero_celular"><i class="fa fa-phone"></i> Número Celular</label>
+                            {{ form.numero_celular }}
+                        </div>
+                        <div>
+                            <label for="id_correo"><i class="fa fa-envelope"></i> Correo Electrónico</label>
+                            {{ form.correo }}
+                        </div>
+                        <div>
+                            <label for="id_password"><i class="fa fa-lock"></i> Contraseña</label>
+                            {{ form.password }}
+                        </div>
+                        <div>
+                            <label for="id_confirm_password"><i class="fa fa-lock"></i> Confirmar Contraseña</label>
+                            {{ form.confirm_password }}
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit"><i class="fa fa-save"></i> Registrate</button>
+                        <a class="redireccion" href="{% url 'login' %}"> ¿Ya tienes cuenta?</a>
+                    </div>
+                </form>
+                
+                {% if form.errors %}
+                    <div class="errores">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-info">
+                <h1>Registrate</h1>
+                <p>Con NomiGo aprende la gestion de nomina de una manera realista y profesional con solo unos cuantos clicks</p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
