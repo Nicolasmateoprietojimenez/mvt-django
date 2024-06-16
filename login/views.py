@@ -101,7 +101,3 @@ def login_view(request):
     return render(request, 'login_empleado.html', {'form': form})
 
 
-def home_empleados(request, empleado_nro_documento):
-    empleado = Empleado.objects.get(nro_documento=empleado_nro_documento)
-    
-    return render(request, 'home_empleados.html', {'empleado': empleado, 'registros': empleado})
