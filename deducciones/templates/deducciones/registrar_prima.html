@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Prima</title>
+</head>
+<body>
+
+<h2>Registrar Prima para {{ empleado }}</h2>
+
+<!-- Muestra el salario base del empleado -->
+<p>Salario Base: {{ salario_base|floatformat:2 }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Calcular Prima</button>
+</form>
+
+{% if prima_calculada is not None %}
+<div>
+    <h3>Resultado del cálculo de la prima:</h3>
+    <p>Prima Calculada: {{ prima_calculada|floatformat:2 }}</p>
+    {% if total is not None %}
+    <p>Total: {{ total|floatformat:2 }}</p>
+    {% endif %}
+</div>
+{% endif %}
+
+</body>
+</html>
