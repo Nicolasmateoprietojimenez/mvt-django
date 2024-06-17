@@ -26,7 +26,7 @@
             <td>{{ emp.tipo_Hora.tipo_hora_recargo }}</td>
             <td>{{ emp.horas_trabajadas }}</td>
             <td>{{ emp.valor }}</td>
-            <td><a type="submit" href="{% url 'calcula' emp.nro_documento %}">Calcular horas</a></td>
+            <td><a type="submit" href="{% url 'calcula' emp.nro_documento %}">Detalle Horas Extra</a></td>
         </tr>
         {% endfor %}
     </table>

@@ -13,14 +13,15 @@
         <div>
             <p><strong>Nombre:</strong> {{ data.nombre }}</p>
             <p><strong>Apellido:</strong> {{ data.apellido }}</p>
+            <p><strong>Documento:</strong> {{ data.docu }}</p>
             <p><strong>Fecha y Hora:</strong> {{ data.fecha_hora }}</p>
             <p><strong>Tipo de Horas:</strong> {{ data.tipo_horas }}</p>
-            <p><strong>Horas Semanales:</strong> {{ data.horasSemanal }}</p>
             <p><strong>Horas Trabajadas:</strong> {{ data.hora1 }}</p>
             <p><strong>Resultado:</strong> {{ data.resultado }}</p>
+            {% endfor %}
             <hr>
         </div>
-    {% endfor %}
-
+    
+    <a href="{% url 'horas' %}">Volver</a>
 </body>
 </html>
