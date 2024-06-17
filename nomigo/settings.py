@@ -69,10 +69,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # URL base para servir archivos de medios cargados
 MEDIA_URL = '/media/'
 
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates'],  # Agrega aquí la carpeta global de templates si la tienes
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,7 +97,7 @@ WSGI_APPLICATION = 'nomigo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

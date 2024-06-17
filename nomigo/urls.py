@@ -27,5 +27,6 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('empleados/', include('gestion_empleados.urls')),
     path('devengados/', include('devengos.urls')),
+    path('deducciones/', include('deducciones.urls')),
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

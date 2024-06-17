@@ -1,14 +1,13 @@
 from django.db import models
-
-# Create your models here.
-
-def empleadoDocu():
-    from gestion_empleados.models import Empleado
-    return Empleado
+from django.db import models
+from gestion_empleados.models import Empleado as GestionEmpleado
 
 class SeguridadSocial(models.Model):
-
-    nro_documento = models.ForeignKey('gestion_empleados.Empleado', on_delete=models.CASCADE, null=True)
+    empleado = models.OneToOneField(
+        GestionEmpleado,
+        on_delete=models.CASCADE,
+        related_name='seguridad_social'  # Nombre relacionado para acceder desde Empleado
+    )
 
     CONCEPTO_CHOICES = [
         ('salud_empleador', 'Salud Empleador'),
@@ -21,25 +20,18 @@ class SeguridadSocial(models.Model):
     porcentaje_seguridad_social = models.DecimalField(max_digits=5, decimal_places=2, help_text="Porcentaje de SS")
 
     def __str__(self):
-        return f"{self.concepto} - {self.porcentaje_seguridad_social}%"
+        return f"{self.empleado} - {self.concepto} - {self.porcentaje_seguridad_social}%"
 
-arls = [
+
+class NivelRiesgo(models.Model):
+    nivel_riesgo = models.CharField(max_length=100, help_text="Nivel de riesgo", choices=[
         ('1', 'Riesgo I'),
         ('2', 'Riesgo II'),
         ('3', 'Riesgo III'),
         ('4', 'Riesgo IV'),
         ('5', 'Riesgo V'),
-    ]
-porcen = [
-        ('1', '0,348%'),
-        ('2', '0,522%'),
-        ('3', '1,044%'),
-        ('4', '2,436%'),
-        ('5', '6,960%'),
-    ]
-class NivelRiesgo(models.Model):
-    nivel_riesgo = models.CharField(max_length=100, help_text="Nivel de riesgo",choices=arls)
-    porcentaje_nivel = models.CharField(max_length=100,choices=porcen, help_text="Porcentaje del nivel de riesgo")
+    ])
+    porcentaje_nivel = models.DecimalField(max_digits=5, decimal_places=2, help_text="Porcentaje del nivel de riesgo")
 
     def __str__(self):
-        return f"{self.nivel_riesgo} - {self.porcentaje_nivel}%"
+        return f"{self.get_nivel_riesgo_display()} - {self.porcentaje_nivel}%"

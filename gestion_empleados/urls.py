@@ -1,7 +1,8 @@
+# gestion_empleados/urls.py
+
 from django.urls import path
-from . import views
+from .views import home_empleados
 
 urlpatterns = [
-    path('home_empleados/<int:empleado_nro_documento>/', views.home_empleados, name='home_empleados'),
-    # otras rutas
+    path('<int:empleado_nro_documento>/', home_empleados, name='home_empleados'),
 ]
