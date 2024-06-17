@@ -32,6 +32,28 @@
     <p>Total Horas Extra:{{ total_valor }}</p>
     <p>Total salario + Horas Extra: {{ salario_total }} mil</p>
 
+    <p>¿Cuenta con auxilio de transporte?: {{ tiene }}</p>
+    
+    {% if not auxilio %}
+
+    {% else %}
+
+        <p>Auxilio de transporte + salario total: {{ aux_trans }}</p>
+
+    {% endif %}
+
+    
+    <h1>Total Devengado</h1>
+
+    <p>{{deveng}}</p>
+    
+    <h1>Cesantias Y Int. Cesantias</h1>
+
+    <p>Cesantias: {{cesantias}}</p>
+    <p>Intereses de cesantias: {{ intereses_cesantias }}</p>
+
+
+
     {% endif %}
     
 </body>

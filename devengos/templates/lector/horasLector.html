@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
+    <title>Horas Extra</title>
+</head>
+<body>
+
+    <table style="text-align: center;">
+        <tr>
+            <th>Empleado</th>
+            <th>Fecha Y Hora</th>
+            <th>Horas Semanales</th>
+            <th>Tipo de Hora</th>
+            <th> Horas Extra Trabajadas</th>
+            <th>Valor Hora Extra</th>
+        </tr>
+        {% for emp in horas %}
+        <tr>
+            <td>{{ emp.nro_documento.nombre1 }} {{ emp.nro_documento.apellido1 }}</td>
+            <td>{{ emp.fecha_hora }}</td>
+            <td>{{ emp.horas_Semanales }}</td>
+            <td>{{ emp.tipo_Hora.tipo_hora_recargo }}</td>
+            <td>{{ emp.horas_trabajadas }}</td>
+            <td>{{ emp.valor }}</td>
+            
+            
+            {% endfor %}
+        </tr>
+        
+    </table>
+    <br>
+    {% if horas %}
+
+        <a type="submit" href="{% url 'calculaLector' horas.0.nro_documento %}">Ver Detalles Horas</a><br><br>
+
+        <a href="{% url 'home_empleados' horas.0.nro_documento %}">Volver al home</a><br><br>
+    {% endif %}
+    <a href="{% url 'buscar_empleado' %}">Realizar Deveengado</a>
+
+    
+</body>
+</html>

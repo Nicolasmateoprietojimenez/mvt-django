@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo de Horas Extra</title>
+</head>
+<body>
+    <h1>Detalle de Horas Extra</h1>
+
+    <!-- Iterar sobre data_list y mostrar cada conjunto de datos -->
+    {% for data in data_list %}
+        <div>
+            <p><strong>Nombre:</strong> {{ data.nombre }}</p>
+            <p><strong>Apellido:</strong> {{ data.apellido }}</p>
+            <p><strong>Documento:</strong> {{ data.documento }}</p>
+            <p><strong>Fecha y Hora:</strong> {{ data.fecha_hora }}</p>
+            <p><strong>Tipo de Horas:</strong> {{ data.tipo_horas }}</p>
+            <p><strong>Horas Trabajadas:</strong> {{ data.hora1 }}</p>
+            <p><strong>Resultado:</strong> {{ data.resultado }}</p>
+            
+            <hr>
+        </div>
+    {% endfor %}
+    
+    {% if data_list %}
+    <a href="{% url 'horasLector' data_list.0.documento %}">Volver</a>
+    {% endif %}
+
+    
+</body>
+</html>
