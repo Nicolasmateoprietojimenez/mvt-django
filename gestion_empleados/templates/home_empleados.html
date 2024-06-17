@@ -48,7 +48,7 @@
             {% if registros.rol == 'LECTOR' %}
             <a href="{% url 'horasLector' request.session.empleado_nro_documento %}"><i class="fas fa-clock"></i> Consultar Horas extra</a>
             <a href="{% url 'calcular_seguridad_social' registros.nro_documento %}"><i class="fas fa-calculator"></i> Calcular Seguridad social</a>
-            <a href="#"><i class="fas fa-shield-alt"></i> Obtener ARL</a>
+            <a href="{% url 'calcular_arl' registros.nro_documento %}"><i class="fas fa-shield-alt"></i> Obtener ARL</a>
             <a href="{% url 'registrar_prima' registros.nro_documento %}"><i class="fas fa-hand-holding-usd"></i> Calcular prima</a>
             {% endif %}
             </div>

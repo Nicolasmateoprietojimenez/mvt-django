@@ -8,10 +8,10 @@ from .forms import PrimaForm
 def detalle_prima(request, prima_id):
     prima = get_object_or_404(Prima, id=prima_id)
 
-    context = {
+    data = {
         'prima': prima,
     }
-    return render(request, 'deducciones/detalle_prima.html', context)
+    return render(request, 'deducciones/detalle_prima.html', data)
 
 def calcular_seguridad_social(request, empleado_nro_documento):
     empleado = get_object_or_404(GestionEmpleado, nro_documento=empleado_nro_documento)
@@ -20,7 +20,7 @@ def calcular_seguridad_social(request, empleado_nro_documento):
     pension_descuento = salario_base * 0.04
     salario_final = salario_base - (salud_descuento + pension_descuento)
 
-    context = {
+    data = {
         'empleado': empleado,
         'salario_base': salario_base,
         'salud_descuento': salud_descuento,
@@ -28,7 +28,7 @@ def calcular_seguridad_social(request, empleado_nro_documento):
         'salario_final': salario_final,
     }
     
-    return render(request, 'deducciones/calcular_seguridad_social.html', context)
+    return render(request, 'deducciones/calcular_seguridad_social.html', data)
 
 def registrar_prima(request, empleado_nro_documento):
     empleado = get_object_or_404(GestionEmpleado, nro_documento=empleado_nro_documento)
@@ -53,3 +53,23 @@ def registrar_prima(request, empleado_nro_documento):
         form = PrimaForm()
 
     return render(request, 'deducciones/registrar_prima.html', {'form': form, 'empleado': empleado, 'salario_base': empleado.salario_base})
+
+
+from decimal import Decimal
+
+def calcular_arl(request, empleado_nro_documento):
+    empleado = get_object_or_404(GestionEmpleado, nro_documento=empleado_nro_documento)
+    nivel_riesgo = empleado.nivel_riesgo
+    porcentaje_nivel = nivel_riesgo.porcentaje_nivel
+
+    salario_base = empleado.salario_base
+    valor_arl = (Decimal(salario_base) * Decimal('0.4')) * (porcentaje_nivel / Decimal('100'))
+
+    data = {
+        'empleado': empleado,
+        'nivel_riesgo': nivel_riesgo,
+        'porcentaje_nivel': porcentaje_nivel,
+        'valor_arl': valor_arl,
+    }
+
+    return render(request, 'deducciones/arl.html', data)

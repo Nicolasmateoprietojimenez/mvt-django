@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consulta ARL</title>
+</head>
+<body>
+    <h1>Consulta ARL</h1>
+    
+    <p><strong>Señor@:</strong> {{ empleado.nombre1 }} {{ empleado.nombre2 }} {{ empleado.apellido1 }} {{ empleado.apellido2 }}</p>
+    <p><strong>Número de Documento:</strong> {{ empleado.nro_documento }}</p>
+
+    <h2>Detalles de Riesgo</h2>
+    <p><strong>Nivel de Riesgo:</strong> {{ nivel_riesgo.get_nivel_riesgo_display }}</p>
+    <p><strong>Porcentaje de Nivel de Riesgo:</strong> {{ porcentaje_nivel }}%</p>
+
+    <h2>Salario y ARL</h2>
+    <p><strong>Salario Base:</strong> {{ empleado.salario_base }}</p>
+    <p><strong>Valor del ARL:</strong> {{ valor_arl }}</p>
+</body>
+</html>
