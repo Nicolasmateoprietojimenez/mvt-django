@@ -73,3 +73,4 @@ class Empleado(models.Model):
     
     def __str__(self):
         return f"{self.nro_documento}"
+

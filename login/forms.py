@@ -1,6 +1,6 @@
 import re
 from django import forms
-from gestion_empleados.models import Empleado
+from login.models import Administrador
 
 class LoginForm(forms.Form):
     tipo_documento = forms.ChoiceField(choices=[
@@ -16,7 +16,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))
 
     
-class EmpleadoForm(forms.ModelForm):
+class AdminForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(), 
         label="Contraseña",
@@ -24,11 +24,10 @@ class EmpleadoForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Confirmar Contraseña")
     
     class Meta:
-        model = Empleado
+        model = Administrador
         fields = [
             'tipo_documento',
             'nro_documento',
-            'fecha_expedicion',
             'nombre1',
             'nombre2',
             'apellido1',
@@ -37,10 +36,7 @@ class EmpleadoForm(forms.ModelForm):
             'correo',
             'password',
         ]
-        widgets = {
-            'fecha_expedicion': forms.DateInput(attrs={'type': 'date'}),
-        }
-
+        
     def clean_nro_documento(self):
         nro_documento = self.cleaned_data.get("nro_documento")
         if not nro_documento.isdigit():
