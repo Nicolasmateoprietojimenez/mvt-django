@@ -40,17 +40,18 @@ def calcularHoras(request, nro_documento):
         horasSemanal = int(horitas.horas_Semanales)
         hora1 = int(horitas.horas_trabajadas)
 
-        calculo = salario / horasSemanal
+        horasS = (horasSemanal / 6) * 30
+        calculo = salario / horasS
         resultado = 0
 
         if tipo_horas == 'extra_diurno':
-            resultado = (calculo * 0.25) * hora1  # extra diurna
+            resultado = (calculo * 1.25) * hora1  # extra diurna
         elif tipo_horas == 'extra_nocturno':
-            resultado = (calculo * 0.75) * hora1  # extra nocturna
+            resultado = (calculo * 1.75) * hora1  # extra nocturna
         elif tipo_horas == 'extra_diurno_dominical_festivo':
-            resultado = (calculo + calculo) * hora1  # extra diurna dominical
+            resultado = (calculo * 2) * hora1  # extra diurna dominical
         elif tipo_horas == 'extra_nocturno_dominical_festivo':
-            resultado = (calculo * 1.50) * hora1  # extra nocturna dominical
+            resultado = (calculo * 2.5) * hora1  # extra nocturna dominical
         elif tipo_horas == 'recargo_nocturno': 
             resultado = (calculo * 0.35) * hora1  # recargo nocturno
         elif tipo_horas == 'recargo_dominical_festivo':
