@@ -3,7 +3,7 @@ from django.db.models import Sum
 from gestion_empleados.models import Empleado
 from . models import TipoHoraRecargo, HoraExtra
 from .forms import TipoHoraRecargoform, HoraExtraform, BuscarEmpleadoForm
-from datetime import datetime
+from datetime import date, datetime
 
 # Create your views here.
 
@@ -67,7 +67,7 @@ def calcularHoras(request, nro_documento):
             'nombre': nombre,
             'apellido': apellido,
             'docu': documento,
-            'resultado': resultado,
+            'resultado': int(resultado),
             'horasSemanal': horasSemanal,
             'fecha_hora': fecha_hora,
             'hora1': hora1,
@@ -90,6 +90,7 @@ def buscar_empleado(request):
     tiene = ''
     auxilio = 0
     deveng = Decimal('0')
+    dias_diferencia = ""
     cesantias = Decimal('0')
     intereses_cesantias = Decimal('0')
 
@@ -102,21 +103,31 @@ def buscar_empleado(request):
             total_valor = sum(horas_extras.values_list('valor', flat=True))
             salario_total = total_valor + empleado.salario_base
             auxilio = empleado.auxilio_transporte
-
+            # fecha_ingreso = empleado.fecha_ingreso
+            
             if empleado.auxilio_transporte:
                 aux_trans, tiene = empleado.salario_base + 162000, "Si cuenta con aux de transporte"
                 deveng = Decimal(salario_total) + Decimal(162000)
             else:
                 tiene = "No cuenta con aux de transporte"
                 deveng = Decimal(salario_total)
+            
+            hoy = date.today()
+            
+            if empleado.fecha_ingreso:
+                dias_diferencia = (hoy - empleado.fecha_ingreso).days
+                
+                if (hoy - empleado.fecha_ingreso).days > 0:
+                    dias_diferencia -= 1
+                    
+            else:
+                print("La fecha de ingreso es nula.")
 
-            cesantias = deveng * Decimal('0.0833')
 
-            # Cálculo de intereses sobre cesantías (ejemplo: tasa del 12% anual)
-            tasa_intereses_anual = Decimal('0.12')
-            fecha_actual = datetime.now()
-            meses_transcurridos = fecha_actual.month  # Mes actual
-            intereses_cesantias = cesantias * (tasa_intereses_anual / Decimal('12')) * meses_transcurridos
+
+            cesantias = float((deveng * dias_diferencia) / 360)
+    
+            intereses_cesantias = ((cesantias * dias_diferencia) * 0.12) / 360
 
     else:
         form = BuscarEmpleadoForm()
@@ -133,6 +144,7 @@ def buscar_empleado(request):
         'deveng': deveng,
         'cesantias': cesantias,
         'intereses_cesantias': intereses_cesantias,
+        'prueba':dias_diferencia,
     })
 
 

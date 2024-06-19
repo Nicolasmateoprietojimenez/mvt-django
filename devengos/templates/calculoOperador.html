@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculo de Horas Extra</title>
+    <title>Detalle de Horas Extra</title>
 </head>
 <body>
     <h1>Detalle de Horas Extra</h1>
@@ -17,11 +17,30 @@
             <p><strong>Fecha y Hora:</strong> {{ data.fecha_hora }}</p>
             <p><strong>Tipo de Horas:</strong> {{ data.tipo_horas }}</p>
             <p><strong>Horas Trabajadas:</strong> {{ data.hora1 }}</p>
-            <p><strong>Resultado:</strong> {{ data.resultado }}</p>
-            {% endfor %}
-            <hr>
+            <p><strong>Resultado:</strong> <span class="valor">{{ data.resultado }}</span></p>
         </div>
+        <hr>
+    {% endfor %}
     
     <a href="{% url 'horas' %}">Volver</a>
+
+    <script>
+        // Función para formatear número como moneda COP
+        function formatCurrency(number) {
+            return new Intl.NumberFormat('es-CO', { 
+                style: 'currency', 
+                currency: 'COP', 
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0 
+            }).format(number);
+        }
+    
+        // Obtener los elementos con la clase 'valor' y formatearlos como moneda COP
+        const valores = document.querySelectorAll('.valor');
+        valores.forEach(valor => {
+            let numero = parseFloat(valor.textContent.trim());
+            valor.textContent = formatCurrency(numero);
+        });
+    </script>
 </body>
 </html>

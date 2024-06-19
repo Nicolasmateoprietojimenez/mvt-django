@@ -25,12 +25,12 @@
     
     {% for horas_extras in horas_extras %}
 
-    <li>Horas Extra Realizadas: {{ horas_extras.tipo_Hora }} / tiempo: {{ horas_extras.fecha_hora }} / valor: {{ horas_extras.valor }}</li>
+    <li>Horas Extra Realizadas: {{ horas_extras.tipo_Hora }} / tiempo: {{ horas_extras.fecha_hora }} / valor: <span class="valor">{{ horas_extras.valor }}</span> </li>
 
     {% endfor %}
 
-    <p>Total Horas Extra:{{ total_valor }}</p>
-    <p>Total salario + Horas Extra: {{ salario_total }} mil</p>
+    <p>Total Horas Extra: <span class="valor">{{ total_valor }}</span> </p>
+    <p>Total salario + Horas Extra: <span class="valor"> {{ salario_total }} </span></p>
 
     <p>¿Cuenta con auxilio de transporte?: {{ tiene }}</p>
     
@@ -38,23 +38,41 @@
 
     {% else %}
 
-        <p>Auxilio de transporte + salario total: {{ aux_trans }}</p>
+        <p>Auxilio de transporte + salario total: <span class="valor"> {{ aux_trans }}</span></p>
 
     {% endif %}
 
     
     <h1>Total Devengado</h1>
 
-    <p>{{deveng}}</p>
+    <p> <span class="valor">{{deveng}}</span></p>
     
     <h1>Cesantias Y Int. Cesantias</h1>
 
-    <p>Cesantias: {{cesantias}}</p>
-    <p>Intereses de cesantias: {{ intereses_cesantias }}</p>
+    <p>Cesantias: <span class="valor"> {{cesantias}}</span></p>
+    <p>Intereses de cesantias: <span class="valor"> {{ intereses_cesantias }}</span></p>
 
-
+    <p>{{prueba}}</p>
 
     {% endif %}
     
+    <script>
+        // Función para formatear número como moneda COP
+        function formatCurrency(number) {
+            return new Intl.NumberFormat('es-CO', { 
+                style: 'currency', 
+                currency: 'COP', 
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0 
+            }).format(number);
+        }
+    
+        // Obtener los elementos con la clase 'valor' y formatearlos como moneda COP
+        const valores = document.querySelectorAll('.valor');
+        valores.forEach(valor => {
+            let numero = parseFloat(valor.textContent.trim());
+            valor.textContent = formatCurrency(numero);
+        });
+    </script>
 </body>
 </html>
