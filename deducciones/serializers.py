@@ -1,13 +1,10 @@
-# deducciones/serializers.py
-
 from rest_framework import serializers
-from .models import Prima, SeguridadSocial, NivelRiesgo
-from gestion_empleados.models import Empleado
+from .models import Prima, SeguridadSocial, NivelRiesgo, Empleado
 
 class PrimaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prima
-        fields = '__all__'
+        fields = '__all__'  
 
 class SeguridadSocialSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,4 +19,4 @@ class NivelRiesgoSerializer(serializers.ModelSerializer):
 class EmpleadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empleado
-        fields = '__all__'  # Ajusta los campos según lo necesario
+        fields = '__all__'

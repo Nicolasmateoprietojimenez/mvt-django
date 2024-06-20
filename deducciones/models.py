@@ -6,8 +6,12 @@ from gestion_empleados.models import Empleado
 
 class Prima(models.Model):
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    dias_trabajados = models.PositiveIntegerField()
+    dias_trabajados = models.IntegerField()
     prima_calculada = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.prima_calculada = self.empleado.salario_base * self.dias_trabajados / 360
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.empleado} - Prima"

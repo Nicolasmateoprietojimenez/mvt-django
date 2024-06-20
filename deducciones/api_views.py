@@ -1,5 +1,3 @@
-# deducciones/api_views.py
-
 from decimal import Decimal
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -13,11 +11,22 @@ class PrimaViewSet(viewsets.ModelViewSet):
     queryset = Prima.objects.all()
     serializer_class = PrimaSerializer
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=['post'])
     def calcular_prima(self, request, pk=None):
-        prima = self.get_object()
-        prima_calculada = prima.empleado.salario_base * prima.dias_trabajados / 360
-        return Response({'prima_calculada': prima_calculada})
+        prima = get_object_or_404(self.queryset, pk=pk)
+        dias_trabajados = request.data.get('dias_trabajados', None)
+        
+        if dias_trabajados is not None:
+            try:
+                dias_trabajados = int(dias_trabajados)
+                prima_calculada = prima.empleado.salario_base * dias_trabajados / Decimal('360')
+                return Response({'prima_calculada': prima_calculada})
+            except ValueError:
+                return Response({'error': 'El parámetro dias_trabajados debe ser un entero.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({'error': 'El parámetro dias_trabajados es requerido.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 class SeguridadSocialViewSet(viewsets.ModelViewSet):
